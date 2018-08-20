@@ -26,6 +26,6 @@ public class MessagePrinter {
     public void print() {
         String message = producer.getMessage();
         message = decorator != null ? decorator.decorate(message) : message;
-        System.out.println(producer.getMessage());
+        System.out.println(message);
     }
 }
