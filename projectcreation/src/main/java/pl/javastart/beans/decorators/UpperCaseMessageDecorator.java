@@ -5,7 +5,8 @@ import org.springframework.stereotype.Component;
 import pl.javastart.beans.decorators.MessageDecorator;
 
 @Component
-@Primary
+//@Primary
+@Decorator(type = Decorator.DecoratorType.UPPER_CASE)
 public class UpperCaseMessageDecorator implements MessageDecorator {
     @Override
     public String decorate(String msg) {

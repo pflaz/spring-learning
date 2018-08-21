@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("simpleMessageProducer")
+@Producer(type=Producer.ProducerType.SIMPLE)
 public class SimpleMessageProducer implements MessageProducer {
     @Override
     public String getMessage() {

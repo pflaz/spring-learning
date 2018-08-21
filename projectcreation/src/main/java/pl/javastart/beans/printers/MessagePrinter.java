@@ -3,8 +3,11 @@ package pl.javastart.beans.printers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import pl.javastart.beans.decorators.Decorator;
+import pl.javastart.beans.producers.FileMessage;
 import pl.javastart.beans.producers.MessageProducer;
 import pl.javastart.beans.decorators.MessageDecorator;
+import pl.javastart.beans.producers.Producer;
 
 @Component
 public class MessagePrinter {
@@ -13,7 +16,7 @@ public class MessagePrinter {
     private MessageDecorator decorator;
 
     @Autowired
-    public MessagePrinter(@Qualifier("fileMessageProducer") MessageProducer producer) {
+    public MessagePrinter(@Producer(type=Producer.ProducerType.SIMPLE) MessageProducer producer) {
         this.producer = producer;
     }
 
@@ -22,7 +25,8 @@ public class MessagePrinter {
     }
 
     @Autowired(required = false)
-    public void setDecorator(MessageDecorator decorator) {
+    @Decorator(type = Decorator.DecoratorType.UPPER_CASE)
+    public void setDecorator( MessageDecorator decorator) {
         this.decorator = decorator;
     }
 
