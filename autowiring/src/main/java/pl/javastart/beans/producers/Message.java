@@ -13,10 +13,10 @@ ElementType.TYPE,
 ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Qualifier
-public @interface Producer {
-    ProducerType type();
+public @interface Message {
+    MessageType type();
 
-    public enum ProducerType {
+    enum MessageType {
         SIMPLE,
         FILE
     }
