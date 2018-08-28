@@ -1,4 +1,4 @@
-package pl.javastart.model;
+package pl.javastart;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
