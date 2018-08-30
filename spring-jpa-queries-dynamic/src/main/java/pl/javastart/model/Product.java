@@ -1,36 +1,31 @@
 package pl.javastart.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "product")
 public class Product implements Serializable {
-    public static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_product")
     private Long id;
-    @Column(name = "product_name", nullable = false)
     private String name;
-    @Column(name = "price")
+    private String producer;
     private Double price;
-    @Column(name = "details")
-    private String details;
-    @ManyToMany(mappedBy = "products")
-    private List<Order> orders;
 
     Product() {
 
     }
 
-    public Product(String name, Double price, String details) {
+    public Product(String name, String producer, Double price) {
         this.name = name;
+        this.producer = producer;
         this.price = price;
-        this.details = details;
     }
 
     public Long getId() {
@@ -49,20 +44,20 @@ public class Product implements Serializable {
         this.name = name;
     }
 
+    public String getProducer() {
+        return producer;
+    }
+
+    public void setProducer(String producer) {
+        this.producer = producer;
+    }
+
     public Double getPrice() {
         return price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
     }
 
     @Override
@@ -72,14 +67,14 @@ public class Product implements Serializable {
         Product product = (Product) o;
         return Objects.equals(id, product.id) &&
                 Objects.equals(name, product.name) &&
-                Objects.equals(price, product.price) &&
-                Objects.equals(details, product.details);
+                Objects.equals(producer, product.producer) &&
+                Objects.equals(price, product.price);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, price, details);
+        return Objects.hash(id, name, producer, price);
     }
 
     @Override
@@ -87,8 +82,8 @@ public class Product implements Serializable {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", producer='" + producer + '\'' +
                 ", price=" + price +
-                ", details='" + details + '\'' +
                 '}';
     }
 }

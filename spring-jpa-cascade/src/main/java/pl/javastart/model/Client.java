@@ -2,6 +2,7 @@ package pl.javastart.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,8 +21,13 @@ public class Client implements Serializable {
     private String lastName;
     @Column(name = "address", nullable = false)
     private String address;
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private List<Order> orders;
+    @OneToMany(
+            mappedBy = "client",
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            orphanRemoval = true
+    )
+    private List<Order> orders = new ArrayList<>();
 
     Client() {}
 
@@ -29,6 +35,11 @@ public class Client implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
+    }
+
+    public void addOrder(Order order) {
+        order.setClient(this);
+        getOrders().add(order);
     }
 
     public Long getId() {

@@ -17,24 +17,18 @@ public class SpringJpaMtmApplication {
         ConfigurableApplicationContext ctx = SpringApplication.run(SpringJpaMtmApplication.class, args);
 
         Client client = new Client("firstname", "lastname", "address");
+        Order order = new Order("order details");
+        Product product1 = new Product("product 1", 1.11, "det1");
+        Product product2 = new Product("product 2", 2.22, "det2");
+        order.getProducts().add(product1);
+        order.getProducts().add(product2);
+        client.addOrder(order);
         ClientDao clientDao = ctx.getBean(ClientDao.class);
         clientDao.save(client);
-        System.out.println(client);
 
-        Order order = new Order("details");
-        order.setClient(client);
-        OrderDao orderDao = ctx.getBean(OrderDao.class);
-        orderDao.save(order);
+        clientDao.removeAllOrders(client);
 
-        Product product1 = new Product("prod1", 1.11, "det1");
-        Product product2 = new Product("prod2", 2.22, "det2");
-        ProductDao productDao = ctx.getBean(ProductDao.class);
-        productDao.save(product1);
-        productDao.save(product2);
-
-        orderDao.addProductsToOrder(order.getId(), product1, product2);
-
-        Client retrievedClient = clientDao.get(client.getId());
+        Client retrievedClient = clientDao.get(1L);
         System.out.println(retrievedClient);
 
     }

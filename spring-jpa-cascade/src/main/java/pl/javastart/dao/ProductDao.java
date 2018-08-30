@@ -1,11 +1,12 @@
 package pl.javastart.dao;
 
 import org.springframework.stereotype.Repository;
-import pl.javastart.model.Client;
+import pl.javastart.model.Product;
 
 import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public class ClientDao extends GenericDao<Client, Long> {
+public class ProductDao extends GenericDao<Product, Long> {
+
 }
