@@ -44,4 +44,16 @@ public class ProductDao {
         TypedQuery<Product> query = entityManager.createQuery(jpqlQuery, Product.class);
         return query.getResultList();
     }
+
+    public List<Product> getByName(String name) {
+        TypedQuery<Product> query = entityManager.createNamedQuery("Product.findByName", Product.class);
+        query.setParameter("name", name);
+        return query.getResultList();
+    }
+
+    public void deleteByProducer(String producer) {
+        Query query = entityManager.createQuery("DELETE from Product p WHERE p.producer = :producer");
+        query.setParameter("producer", producer);
+        query.executeUpdate();
+    }
 }

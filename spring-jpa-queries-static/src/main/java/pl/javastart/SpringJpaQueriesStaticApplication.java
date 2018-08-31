@@ -37,6 +37,15 @@ public class SpringJpaQueriesStaticApplication {
         List<Product> productsSorted = productDao.customGet("SELECT p from Product p ORDER BY p.price ASC");
         productsSorted.forEach(System.out::println);
 
+        System.out.println("Products got by name:");
+        List<Product> productsGotByName = productDao.getByName("product 3");
+        productsGotByName.forEach(System.out::println);
+
+        System.out.println("Delete by producer:");
+        productDao.deleteByProducer("producer 4");
+        List<Product> productsAfterDelete = productDao.getAll();
+        productsAfterDelete.forEach(System.out::println);
+
         productDao.deleteAll();
         List<Product> productList = productDao.getAll();
         System.out.println("Products after delete: " + productList.size());
