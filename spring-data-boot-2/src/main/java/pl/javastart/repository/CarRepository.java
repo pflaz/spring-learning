@@ -12,7 +12,7 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     Car findFirstByBrand(String brand);
     Car findFirstByPrice(double price);
     List<Car> findFirst3ByBrand(String brand);
-    
+
 
 
 }
