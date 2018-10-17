@@ -5,23 +5,23 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import pl.javastart.model.Message;
 import pl.javastart.model.NumberBean;
-import pl.javastart.service.MessageService;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import java.util.Locale;
+import java.util.Set;
 
 @SpringBootApplication
-public class SpringValidatorCustomConstraintsApplication {
+public class SpringValidatorMessagesApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx = SpringApplication.run(SpringValidatorCustomConstraintsApplication.class, args);
-        MessageService msgService = ctx.getBean(MessageService.class);
-        Message msg = new Message("Hello message", "Cholercia to brzydkie słowo");
-        boolean verifyMessage = msgService.verifyMessage(msg);
-        System.out.println("Wiadomość poprawna? " + verifyMessage);
-
-        ctx.close();
+        ConfigurableApplicationContext ctx = SpringApplication.run(SpringValidatorMessagesApplication.class, args);
+        Locale.setDefault(Locale.ENGLISH);
+        Validator validator = ctx.getBean(Validator.class);
+        NumberBean numberBean = new NumberBean(2);
+        Set<ConstraintViolation<NumberBean>> errors = validator.validate(numberBean);
+        errors.forEach(err -> System.err.println(err.getMessage()));
     }
 
     @Bean

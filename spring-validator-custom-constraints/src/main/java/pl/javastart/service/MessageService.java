@@ -14,7 +14,6 @@ public class MessageService {
     private Validator validator;
 
     @Autowired
-
     public MessageService(Validator validator) {
         this.validator = validator;
     }
