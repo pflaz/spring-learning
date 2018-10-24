@@ -11,6 +11,7 @@ import pl.javastart.model.User;
 import pl.javastart.model.UserRole;
 import pl.javastart.repository.UserRepository;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 

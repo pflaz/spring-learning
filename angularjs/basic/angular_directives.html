@@ -1,0 +1,67 @@
+<html ng-app="app">
+    <head>
+        <title>Angular directives</title>
+    </head>
+
+    <style>
+        .even {
+            color: red;
+        }
+
+        .odd {
+            color: blue;
+        }
+    </style>
+  
+    <body>
+        <div ng-controller="HrefController as ctrl">
+            <a ng-href="https://www.youtube.com/watch?v={{ctrl.movies[0]}}">Java Rap</a>
+            <br />
+            <a ng-href="https://www.youtube.com/watch?v={{ctrl.movies[1]}}">Java us what Java does</a>
+            <br />
+            <img ng-src="{{ctrl.imgSrc}}">
+        </div>
+        <hr>
+
+        <div ng-controller="ShowHideController as ctrl2">
+            <input type="text" ng-model="ctrl.text">
+            <p ng-show="ctrl.text.length">Wprowadzony tekst: {{ctrl.text}}</p>
+            <br>
+            Checkbox: <input type="checkbox" ng-model="ctrl.check">
+            <p ng-show="ctrl.check">Pokaż</p>
+            <p ng-hide="ctrl.check">Ukryj</p>
+        </div>
+
+        <hr>
+        <div ng-controller="RepeatController as rptCtrl">
+            <h1 ng-style="rptCtrl.h1style">All names:</h1>
+            <button ng-click="rptCtrl.changeH1Style()">change H1 style</button>
+            <ul>
+                <li ng-repeat="p in rptCtrl.people"
+                    ng-class-even="'even'"
+                    ng-class-odd="'odd'"
+                >{{p.firstName}} : {{p.lastName}}</li>
+            </ul>
+
+            <table border=1>
+                <thead>
+                    <tr>
+                        <td>First name</td>
+                        <td>Last name</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="p in rptCtrl.people"
+                    ng-class-even="rptCtrl.even"
+                    ng-class-odd="rptCtrl.odd">
+                        <td>{{p.firstName}}</td>
+                        <td>{{p.lastName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="js/app/angular_directives.js"></script>
+    </body>
+</html>

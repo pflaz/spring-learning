@@ -1,0 +1,45 @@
+<html ng-app="app">
+    <head>
+        <title>Angular events</title>
+    </head>
+    <style>
+        h1 {
+            width: 300px;
+            border-style: dotted;
+        }
+    </style>
+    <body>
+        <div ng-controller="ClickController as clickControl">
+            <input type="text" ng-model="clickControl.textInput">
+            <button ng-click="clickControl.changeHeader()">Change header</button>
+            <h1 ng-dblclick="clickControl.headerClick()">{{clickControl.header}}</h1>
+        </div>
+        <hr>
+        <div ng-controller="MouseController as mouseControl">
+            <h1 ng-mousedown="mouseControl.mouseDown()">mouse down</h1>
+            <h1 ng-mouseup="mouseControl.mouseUp()">mouse up</h1>
+            <h1 ng-mouseenter="mouseControl.mouseEnter()">mouse enter</h1>
+            <h1 ng-mouseleave="mouseControl.mouseLeave()">mouse leave</h1>
+            <h1 ng-mousemove="mouseControl.mouseMove()">mouse move</h1>
+            <h1 ng-mouseover="mouseControl.mouseOver()">mouse over</h1>
+        </div>
+
+        <div ng-controller="KeyController as keyControl">
+            <input type="text" ng-keydown="keyControl.keyDown()"
+                ng-keyup="keyControl.keyUp()"
+                ng-keypress="keyControl.keyPress()"
+                placeholder="input">
+            <h1>Key down: {{keyControl.down}}</h1>
+            <h1>Key up: {{keyControl.up}}</h1>
+            <h1>Key press: {{keyControl.press}}</h1>
+        </div>
+
+        <div ng-controller="ChangeController as change">
+            <input type="checkbox" ng-model="change.checkbox" ng-change="change.changeState()">
+            <h1>{{change.header}}</h1>
+        </div>
+
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="js/app/angular_events.js"></script>
+    </body>
+</html>
