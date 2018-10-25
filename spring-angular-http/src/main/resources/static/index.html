@@ -15,11 +15,17 @@
         </form>
 
         <ul>
-            <li ng-repeat="prod in prodControl.products">
+            <li ng-repeat="prod in prodControl.products" ng-click="prodControl.loadData(prod.id)">
                 {{prod.name}} - {{prod.producer}} - {{prod.kcal}}
             </li>
         </ul>
+
+        <div ng-show="prodControl.details">
+            <h2>{{prodControl.details.name}}</h2>
+            <p>Producer: {{prodControl.details.producer}}, Kcal: {{prodControl.details.kcal}}</p>
+        </div>
         <script src="node_modules/angular/angular.js"></script>
+        <script src="node_modules/angular-resource/angular-resource.js"></script>
         <script src="js/app.js"></script>
     </body>
 </html>
